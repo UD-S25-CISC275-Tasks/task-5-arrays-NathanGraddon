@@ -5,7 +5,17 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    let newArr: number[] = [];
+    let len: number = numbers.length;
+    if (len == 0) {
+        return [];
+    }
+    if (len == 1) {
+        return [numbers[0], numbers[0]];
+    } else {
+        newArr.push(numbers[0], numbers.slice(-1)[0]);
+    }
+    return newArr;
 }
 
 /**
@@ -13,7 +23,11 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    let newArr: number[] = [];
+    for (let num of numbers) {
+        newArr.push(num * 3);
+    }
+    return newArr;
 }
 
 /**
@@ -21,7 +35,15 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    let convert: number[] = [];
+    for (let num of numbers) {
+        if (Number(num) && !isNaN(Number(num))) {
+            convert.push(Number(num));
+        } else {
+            convert.push(0);
+        }
+    }
+    return convert;
 }
 
 /**
@@ -32,7 +54,18 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    let convert: number[] = [];
+    for (let amount of amounts) {
+        if (amount.startsWith("$")) {
+            amount = amount.slice(1);
+        }
+        if (Number(amount) && !isNaN(Number(amount))) {
+            convert.push(Number(amount));
+        } else {
+            convert.push(0);
+        }
+    }
+    return convert;
 };
 
 /**
@@ -41,7 +74,16 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    let fix: string[] = [];
+    for (let message of messages) {
+        if (message.endsWith("!")) {
+            message = message.toUpperCase();
+        }
+        if (!message.endsWith("?")) {
+            fix.push(message);
+        }
+    }
+    return fix;
 };
 
 /**
@@ -49,7 +91,13 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let count: number = 0;
+    for (let word of words) {
+        if (word.length < 4) {
+            count++;
+        }
+    }
+    return count;
 }
 
 /**
@@ -58,7 +106,19 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if (colors.length == 0) {
+        return true;
+    }
+    for (let color of colors) {
+        if (
+            color.toLowerCase() !== "red" &&
+            color.toLowerCase() !== "blue" &&
+            color.toLowerCase() !== "green"
+        ) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**
@@ -69,7 +129,22 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (addends.length == 0) {
+        return "0=0";
+    }
+    let total: number = 0;
+    let newArr: string[] = [];
+    for (let add of addends) {
+        if (add == addends.slice(-1)[0]) {
+            newArr.push(String(add));
+        } else {
+            newArr.push(add + "+");
+        }
+        total += add;
+    }
+    newArr.splice(0, 0, total + "=");
+    console.log(newArr.join);
+    return newArr.join().split(",").join("");
 }
 
 /**
@@ -82,5 +157,20 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let newArr: number[] = [];
+    let count: number = 0;
+    for (let value of values) {
+        if (value > 0) {
+            count += value;
+        }
+        if (value < 0 && newArr.every((value) => value > 0)) {
+            newArr.push(value, count);
+        } else {
+            newArr.push(value);
+        }
+    }
+    if (newArr.every((value) => value > 0)) {
+        newArr.push(count);
+    }
+    return newArr;
 }
