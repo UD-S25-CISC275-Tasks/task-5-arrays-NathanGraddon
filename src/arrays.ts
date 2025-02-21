@@ -31,15 +31,7 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    let convert: number[] = [];
-    for (let num of numbers) {
-        if (Number(num) && !isNaN(Number(num))) {
-            convert.push(Number(num));
-        } else {
-            convert.push(0);
-        }
-    }
-    return convert;
+    return numbers.map((x) => (isNaN(Number(x)) ? 0 : Number(x)));
 }
 
 /**
