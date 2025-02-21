@@ -101,16 +101,13 @@ export function makeMath(addends: number[]): string {
     }
     let total: number = 0;
     let newArr: string[] = [];
-    for (let add of addends) {
-        if (add == addends.slice(-1)[0]) {
-            newArr.push(String(add));
-        } else {
-            newArr.push(add + "+");
-        }
-        total += add;
-    }
+    addends.map((add) =>
+        add === addends.slice(-1)[0] ?
+            newArr.push(String(add))
+        :   newArr.push(add + "+"),
+    );
+    addends.map((x) => (total += x));
     newArr.splice(0, 0, total + "=");
-    console.log(newArr.join);
     return newArr.join().split(",").join("");
 }
 
